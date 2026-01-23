@@ -25,9 +25,9 @@ const attendanceRoutes = require("./routes/attendanceRoutes");
 // Initialize Express app
 const app = express();
 
-app.get("/", (req, res) => {
-  res.status(200).send("SchoolLink API is running");
-});
+// app.get("/", (req, res) => {
+//   res.status(200).send("SchoolLink API is running");
+// });
 
 // Security middleware
 app.use(helmet());
