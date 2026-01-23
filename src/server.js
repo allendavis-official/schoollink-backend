@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
 
 const db = require("./config/database");
 const { errorHandler, notFound } = require("./middleware/errorHandler");
@@ -37,6 +38,7 @@ app.use(
     credentials: true,
   }),
 );
+app.use(cookieParser());
 
 // Rate limiting
 const limiter = rateLimit({
