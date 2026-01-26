@@ -22,6 +22,7 @@ const gradeRoutes = require("./routes/gradeRoutes");
 const reportCardRoutes = require("./routes/reportCardRoutes");
 const teacherDashboardRoutes = require("./routes/teacherDashboardRoutes");
 const attendanceRoutes = require("./routes/attendanceRoutes");
+const feeRoutes = require("./routes/feeRoutes");
 
 // Initialize Express app
 const app = express();
@@ -106,6 +107,7 @@ app.use(`/api/${API_VERSION}/grades`, gradeRoutes);
 app.use(`/api/${API_VERSION}/report-cards`, reportCardRoutes);
 app.use(`/api/${API_VERSION}/teacher`, teacherDashboardRoutes);
 app.use(`/api/${API_VERSION}/attendance`, attendanceRoutes);
+app.use(`/api/${API_VERSION}/fees`, feeRoutes);
 
 // 404 handler
 app.use(notFound);
