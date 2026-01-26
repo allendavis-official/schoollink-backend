@@ -13,7 +13,7 @@ const getStudentReportCardData = async (req, res) => {
   const reportData = await getReportCardDataInternal(
     studentId,
     academicYearId,
-    schoolId
+    schoolId,
   );
 
   res.json({
@@ -22,7 +22,6 @@ const getStudentReportCardData = async (req, res) => {
   });
 };
 
-// Generate PDF report card
 // Generate PDF report card
 const generateReportCardPDF = async (req, res) => {
   const { studentId, academicYearId } = req.params;
@@ -33,7 +32,7 @@ const generateReportCardPDF = async (req, res) => {
   const dataResponse = await getReportCardDataInternal(
     studentId,
     academicYearId,
-    schoolId
+    schoolId,
   );
   const { student, school, academicYear, subjects, periodAverages } =
     dataResponse;
@@ -45,7 +44,7 @@ const generateReportCardPDF = async (req, res) => {
   res.setHeader("Content-Type", "application/pdf");
   res.setHeader(
     "Content-Disposition",
-    `attachment; filename=report-card-${student.student_id}.pdf`
+    `attachment; filename=report-card-${student.student_id}.pdf`,
   );
 
   // Pipe PDF to response
@@ -62,7 +61,7 @@ const generateReportCardPDF = async (req, res) => {
     .text(school.address || "", { align: "center" });
   doc.text(
     `Phone: ${school.phone || "N/A"} | Email: ${school.email || "N/A"}`,
-    { align: "center" }
+    { align: "center" },
   );
   doc.moveDown();
 
@@ -234,7 +233,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[1],
       rowHeight,
-      { textColor: getColor(subject.period1) }
+      { textColor: getColor(subject.period1) },
     );
     xPos += colWidths[1];
     drawCell(
@@ -243,7 +242,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[2],
       rowHeight,
-      { textColor: getColor(subject.period2) }
+      { textColor: getColor(subject.period2) },
     );
     xPos += colWidths[2];
     drawCell(
@@ -252,7 +251,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[3],
       rowHeight,
-      { textColor: getColor(subject.period3) }
+      { textColor: getColor(subject.period3) },
     );
     xPos += colWidths[3];
     drawCell(
@@ -261,7 +260,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[4],
       rowHeight,
-      { textColor: getColor(subject.sem1Exam) }
+      { textColor: getColor(subject.sem1Exam) },
     );
     xPos += colWidths[4];
     drawCell(
@@ -270,7 +269,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[5],
       rowHeight,
-      { textColor: getColor(subject.sem1Average), bold: true }
+      { textColor: getColor(subject.sem1Average), bold: true },
     );
     xPos += colWidths[5];
     drawCell(
@@ -279,7 +278,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[6],
       rowHeight,
-      { textColor: getColor(subject.period4) }
+      { textColor: getColor(subject.period4) },
     );
     xPos += colWidths[6];
     drawCell(
@@ -288,7 +287,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[7],
       rowHeight,
-      { textColor: getColor(subject.period5) }
+      { textColor: getColor(subject.period5) },
     );
     xPos += colWidths[7];
     drawCell(
@@ -297,7 +296,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[8],
       rowHeight,
-      { textColor: getColor(subject.period6) }
+      { textColor: getColor(subject.period6) },
     );
     xPos += colWidths[8];
     drawCell(
@@ -306,7 +305,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[9],
       rowHeight,
-      { textColor: getColor(subject.sem2Exam) }
+      { textColor: getColor(subject.sem2Exam) },
     );
     xPos += colWidths[9];
     drawCell(
@@ -315,7 +314,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[10],
       rowHeight,
-      { textColor: getColor(subject.sem2Average), bold: true }
+      { textColor: getColor(subject.sem2Average), bold: true },
     );
     xPos += colWidths[10];
     drawCell(
@@ -324,7 +323,7 @@ const generateReportCardPDF = async (req, res) => {
       currentY,
       colWidths[11],
       rowHeight,
-      { textColor: getColor(subject.yearlyAverage), bold: true }
+      { textColor: getColor(subject.yearlyAverage), bold: true },
     );
 
     currentY += rowHeight;
@@ -359,7 +358,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.period1Avg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[1];
   drawCell(
@@ -372,7 +371,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.period2Avg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[2];
   drawCell(
@@ -385,7 +384,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.period3Avg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[3];
   drawCell(
@@ -398,7 +397,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.sem1ExamAvg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[4];
   drawCell(
@@ -411,7 +410,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.sem1OverallAvg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[5];
   drawCell(
@@ -424,7 +423,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.period4Avg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[6];
   drawCell(
@@ -437,7 +436,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.period5Avg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[7];
   drawCell(
@@ -450,7 +449,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.period6Avg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[8];
   drawCell(
@@ -463,7 +462,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.sem2ExamAvg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[9];
   drawCell(
@@ -476,7 +475,7 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.sem2OverallAvg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
   xPos += colWidths[10];
   drawCell(
@@ -489,10 +488,55 @@ const generateReportCardPDF = async (req, res) => {
       textColor: getColor(periodAverages.yearlyOverallAvg),
       bold: true,
       bgColor: "#F5F5F5",
-    }
+    },
   );
 
   currentY += rowHeight;
+
+  // Attendance Section
+  doc.moveDown(2);
+  currentY = doc.y;
+
+  doc
+    .fontSize(11)
+    .font("Helvetica-Bold")
+    .text("Attendance Record", 50, currentY, { underline: true });
+  doc.moveDown(0.5);
+  currentY = doc.y;
+
+  doc.fontSize(9).font("Helvetica");
+  const { attendance } = dataResponse;
+
+  doc.text(`Days Present: ${attendance.daysPresent}`, 50, currentY, {
+    continued: true,
+  });
+  doc.text(`    Days Absent: ${attendance.daysAbsent}`, { continued: true });
+  doc.text(`    Days Late: ${attendance.daysLate}`, { continued: true });
+  doc.text(`    Days Excused: ${attendance.daysExcused}`);
+
+  doc.moveDown(0.3);
+  doc.text(`Total Days Marked: ${attendance.totalDaysMarked}`, 50, doc.y, {
+    continued: true,
+  });
+  doc
+    .font("Helvetica-Bold")
+    .text(`    Attendance Percentage: ${attendance.attendancePercentage}%`, {
+      continued: false,
+    });
+
+  // Color code the percentage
+  if (attendance.attendancePercentage >= 90) {
+    doc.fillColor("#0066CC");
+  } else if (attendance.attendancePercentage >= 75) {
+    doc.fillColor("#FF9900");
+  } else {
+    doc.fillColor("#CC0000");
+  }
+  doc.text(`${attendance.attendancePercentage}% Attendance`, 400, doc.y - 12, {
+    width: 150,
+    align: "right",
+  });
+  doc.fillColor("black").font("Helvetica");
 
   // Legend
   doc.moveDown(2);
@@ -529,7 +573,7 @@ const generateReportCardPDF = async (req, res) => {
 const getReportCardDataInternal = async (
   studentId,
   academicYearId,
-  schoolId
+  schoolId,
 ) => {
   // Get student info
   const studentResult = await db.query(
@@ -538,7 +582,7 @@ const getReportCardDataInternal = async (
      LEFT JOIN student_enrollments se ON s.id = se.student_id AND se.status = 'enrolled'
      LEFT JOIN classes c ON se.class_id = c.id
      WHERE s.id = $1 AND s.school_id = $2`,
-    [studentId, schoolId]
+    [studentId, schoolId],
   );
 
   if (studentResult.rows.length === 0) {
@@ -556,7 +600,7 @@ const getReportCardDataInternal = async (
   // Get academic year info
   const yearResult = await db.query(
     "SELECT * FROM academic_years WHERE id = $1",
-    [academicYearId]
+    [academicYearId],
   );
 
   if (yearResult.rows.length === 0) {
@@ -572,7 +616,7 @@ const getReportCardDataInternal = async (
      JOIN class_subjects cs ON s.id = cs.subject_id
      WHERE cs.class_id = $1
      ORDER BY s.is_core DESC, s.subject_name`,
-    [student.class_id]
+    [student.class_id],
   );
 
   // Get all grades
@@ -582,23 +626,53 @@ const getReportCardDataInternal = async (
      JOIN assessment_periods ap ON sg.assessment_period_id = ap.id
      JOIN semesters s ON ap.semester_id = s.id
      WHERE sg.student_id = $1 AND sg.academic_year_id = $2`,
-    [studentId, academicYearId]
+    [studentId, academicYearId],
   );
+
+  // Get attendance data for the academic year
+  const attendanceQuery = `
+    SELECT 
+      COUNT(*) FILTER (WHERE status = 'present') as days_present,
+      COUNT(*) FILTER (WHERE status = 'absent') as days_absent,
+      COUNT(*) FILTER (WHERE status = 'late') as days_late,
+      COUNT(*) FILTER (WHERE status = 'excused') as days_excused,
+      COUNT(*) as total_days_marked
+    FROM attendance
+    WHERE student_id = $1 
+      AND academic_year_id = $2
+      AND school_id = $3
+  `;
+
+  const attendanceResult = await db.query(attendanceQuery, [
+    studentId,
+    academicYearId,
+    schoolId,
+  ]);
+
+  const attendanceData = attendanceResult.rows[0];
+  const attendancePercentage =
+    attendanceData.total_days_marked > 0
+      ? (
+          (parseInt(attendanceData.days_present) /
+            parseInt(attendanceData.total_days_marked)) *
+          100
+        ).toFixed(1)
+      : 0;
 
   // Get averages
   const averagesResult = await db.query(
     `SELECT * FROM student_averages
      WHERE student_id = $1 AND academic_year_id = $2`,
-    [studentId, academicYearId]
+    [studentId, academicYearId],
   );
 
   // Organize data
   const reportData = subjectsResult.rows.map((subject) => {
     const subjectGrades = gradesResult.rows.filter(
-      (g) => g.subject_id === subject.id
+      (g) => g.subject_id === subject.id,
     );
     const subjectAverages = averagesResult.rows.filter(
-      (a) => a.subject_id === subject.id
+      (a) => a.subject_id === subject.id,
     );
 
     const gradesByPeriod = {};
@@ -608,16 +682,16 @@ const getReportCardDataInternal = async (
     });
 
     const sem1Avg = subjectAverages.find(
-      (a) => a.semester_id && a.semester_average
+      (a) => a.semester_id && a.semester_average,
     );
     const sem2Avg = subjectAverages.find(
       (a) =>
         a.semester_id &&
         a.semester_average &&
-        a.semester_id !== sem1Avg?.semester_id
+        a.semester_id !== sem1Avg?.semester_id,
     );
     const yearlyAvg = subjectAverages.find(
-      (a) => !a.semester_id && a.yearly_average
+      (a) => !a.semester_id && a.yearly_average,
     );
 
     return {
@@ -671,6 +745,15 @@ const getReportCardDataInternal = async (
     academicYear,
     subjects: reportData,
     periodAverages,
+    attendance: {
+      // ✅ NEW: Add attendance data
+      daysPresent: parseInt(attendanceData.days_present) || 0,
+      daysAbsent: parseInt(attendanceData.days_absent) || 0,
+      daysLate: parseInt(attendanceData.days_late) || 0,
+      daysExcused: parseInt(attendanceData.days_excused) || 0,
+      totalDaysMarked: parseInt(attendanceData.total_days_marked) || 0,
+      attendancePercentage: parseFloat(attendancePercentage),
+    },
   };
 };
 
