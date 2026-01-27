@@ -24,6 +24,7 @@ const teacherDashboardRoutes = require("./routes/teacherDashboardRoutes");
 const attendanceRoutes = require("./routes/attendanceRoutes");
 const feeRoutes = require("./routes/feeRoutes");
 const parentPortalRoutes = require("./routes/parentPortalRoutes");
+const parentRoutes = require("./routes/parentRoutes");
 
 // Initialize Express app
 const app = express();
@@ -110,6 +111,7 @@ app.use(`/api/${API_VERSION}/teacher`, teacherDashboardRoutes);
 app.use(`/api/${API_VERSION}/attendance`, attendanceRoutes);
 app.use(`/api/${API_VERSION}/fees`, feeRoutes);
 app.use(`/api/${API_VERSION}/parent-portal`, parentPortalRoutes);
+app.use(`/api/${API_VERSION}/parents`, parentRoutes);
 
 // 404 handler
 app.use(notFound);
